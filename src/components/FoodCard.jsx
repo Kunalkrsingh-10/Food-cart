@@ -1,6 +1,10 @@
 import React from 'react'
 import { IoMdStar } from "react-icons/io";
-const FoodCard = ({id ,img, desc, rating ,name,price,cateogry}) => {
+import { useDispatch} from 'react-redux';
+import { addtoCart } from '../redux/slices/CartSlice';
+
+const FoodCard = ({id ,img, desc, rating ,name,price,cateogry}) => { 
+  const dispatch = useDispatch();
   return (
     <div className='font-bold w-[250px]  bg-white flex flex-col rounded-lg px-10 p-5 gap-2'> 
       <img src={img}
@@ -15,7 +19,7 @@ const FoodCard = ({id ,img, desc, rating ,name,price,cateogry}) => {
         <span className="flex justify-center items-center">
         <IoMdStar className="mr-1 text-yellow-500"/>{rating}
         </span>
-        <button className="p-2 text-white bg-green-500 hover:bg-green-600 rounded-lg text-sm ">Add to cart</button>
+        <button onClick={()=>dispatch(addtoCart({id,name,price,rating,quantity:1}))} className="p-2 text-white bg-green-500 hover:bg-green-600 rounded-lg text-sm ">Add to cart</button>
       </div>
     </div>
   )
